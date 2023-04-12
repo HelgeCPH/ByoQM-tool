@@ -15,6 +15,7 @@ class TesterModel(QualityModel):
         model = {
             "metrics": {
                 "method_count": "./metrics/method_count.py",
+                "truckfactor": "./metrics/truckfactor_for_repo.py",
             },
             "aggregations": {
                 "maintainability": self.maintainability,
@@ -23,7 +24,7 @@ class TesterModel(QualityModel):
         return model
 
     def maintainability(self, results: Dict) -> int | float:
-        return results["method_count"].get_frequency()
+        return results["method_count"].get_frequency() + results["truckfactor"].get_frequency()
 
 
 model = TesterModel()
